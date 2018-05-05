@@ -109,6 +109,32 @@ function executeSQLQuery(queryCmd, callbackFunction){
 
 };
 
+
+app.post('/download', function(req, res, next) {
+  var first = req.body.first;
+  var last = req.body.last;
+  var email = req.body.email;
+  let res_result =  {
+                      message:''
+                    };
+
+   var insertQuery = "insert into bootstrap (first, last, email) values ('"+ first + "','" + last + "','" + email +"')";
+   console.log(insertQuery);
+   executeSQLQuery(insertQuery , function(err , result){
+   		if(! err) {
+   			res_result.message = "Saved successfully!";
+      		res.status(200).json(res_result);
+   		}
+   		else{
+   			res_result.message = "Error in saving";
+      		res.status(500).json(res_result);
+   		}
+   });
+});
+
+
+
+
 function stop() {
   server.close();
 }
