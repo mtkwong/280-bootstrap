@@ -4,6 +4,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
     <style type="text/css">
@@ -26,7 +27,37 @@
         bottom: 0px;
         width: 100%;
       }
+      div.centerstuff{text-align:center;}
+      table {
+        border-collapse: separate;
+        border-spacing: 10px;
+        margin: 0 auto;
+      }
+      div.profileDiv{display:none;}
+      div.profileRight{padding-left:10px;}
     </style>
+    <script type="text/javascript">
+      $(function() {
+        for(var i=1; i<7; i++) {
+          $( "#profile"+i ).dialog({
+             autoOpen: false,
+             height: 400,
+             width: 700,
+             modal: true,
+             resizable: false,
+             draggable: false,
+             buttons: {
+               OK: function() {$(this).dialog("close");}
+             },
+          });
+        }
+      });
+
+      function showProfile(n) {
+        console.log("hello world");
+        $("#profile"+n).dialog("open");
+      }
+    </script>
   </head>
   <body>
     <% include nav.ejs %>
@@ -34,23 +65,96 @@
     <div class="container-fluid text-center">    
     <div class="row content">
       <div class="col-sm-2 sidenav">
-        <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p>
+        <p><a href="https://www.pmi.org/about/learn-about-pmi/what-is-project-management">What is Project Management</a></p>
+        <p><a href="https://www.teamgantt.com/blog/7-habits-of-highly-effective-project-managers/">Effective Project Managers</a></p>
+        <p><a href="https://www.fastcompany.com/3062949/the-secret-sauce-of-business-success">Business Success</a></p>
       </div>
       <div class="col-sm-8 text-left"> 
-        <h1>Welcome</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <div class="centerstuff"><h1>Management</h1></div>
+        <br/>
+        <p>Visionary data scientists. Accomplished industry veterans. Trusted advisors. Proven investors. Our company is led by a world-class team that believes in data's potential to change the world. Our company is proud to be backed by Intel Capital, Investor Growth Capital (IGC), QuestMark Partners, Goldman Sachs, TransLink Capital, and many more other strategic investors.</p>
+        <p>Please click on a profile below to get to know our team better!</p>
         <hr>
-        <h3>Test</h3>
-        <p>Lorem ipsum...</p>
+        <div class="centerstuff"><h2>Executive Team</h2></div>
+        <table>
+          <tr>
+            <td onclick="showProfile(1);"><img src="assets/head01.png" height="200" width="200"></td>
+            <td onclick="showProfile(2);"><img src="assets/head02.png" height="200" width="200"></td>
+            <td onclick="showProfile(3);"><img src="assets/head03.png" height="200" width="200"></td>
+          </tr>
+          <tr>
+            <td onclick="showProfile(4);"><img src="assets/head04.png" height="200" width="200"></td>
+            <td onclick="showProfile(5);"><img src="assets/head05.png" height="200" width="200"></td>
+            <td onclick="showProfile(6);"><img src="assets/head06.png" height="200" width="200"></td>
+          </tr>
+        </table>
       </div>
       <div class="col-sm-2 sidenav">
         <div class="well">
-          <p>ADS</p>
+          <img src="assets/ad_nut.png" height="300" width="180">
         </div>
         <div class="well">
-          <p>ADS</p>
+          <img src="assets/ad_corn.png" height="300" width="180">
+        </div>
+      </div>
+    </div>
+    <div id="profile1" class="profileDiv" title="Adam Anderson">
+      <div class="row">
+        <div class="col-md-4"><img src="assets/head01.png" height="200" width="200"></div>
+        <div class="col-md-8 profileRight">
+          <h2>Adam Anderson</h2>
+          <h4>CEO &amp; Founder</h4>
+          <p>Adam started the company on the basic premise that customer service and success should be the primary goal. His passion and vision for the development of the product has led to the flourishing of BAM, and the sky seems to be the limit for him in every endeavor he undertakes. In his free time, Adam enjoys long walks on the beach with his wife, and playing sports with his kids.</p>
+        </div>
+      </div>
+    </div>
+    <div id="profile2" class="profileDiv" title="Brian Baek">
+      <div class="row">
+        <div class="col-md-4"><img src="assets/head02.png" height="200" width="200"></div>
+        <div class="col-md-8 profileRight">
+          <h2>Brian Baek</h2>
+          <h4>CFO &amp; Co-Founder</h4>
+          <p>Two years after Brian received his MBA from Seoul National University, he met Adam at a local coffee shop when they were both order the same type of latte. Brian now acts as CFO and is in charge of the financial direction of the company, as well as interfacing daily with investors. Brian is an avid fan of any Boston-area sports teams, and enjoys going fishing on the weekends.</p>
+        </div>
+      </div>
+    </div>
+    <div id="profile3" class="profileDiv" title="Christina Cook">
+      <div class="row">
+        <div class="col-md-4"><img src="assets/head03.png" height="200" width="200"></div>
+        <div class="col-md-8 profileRight">
+          <h2>Christina Cook</h2>
+          <h4>Recruiter</h4>
+          <p>Christina recently graduated from UCLA with a major in Communications. She is now head of recruiting at BAM, and enjoys sourcing the brightest talent from around the world to participate in a global cause. Aside from the local Starbucks, Christina can often be found on hiking trails, reading a good book on a rainy day, or pondering the metaphysical nature of the universe.</p>
+        </div>
+      </div>
+    </div>
+    <div id="profile4" class="profileDiv" title="Daniel Dinwiddie">
+      <div class="row">
+        <div class="col-md-4"><img src="assets/head04.png" height="200" width="200"></div>
+        <div class="col-md-8 profileRight">
+          <h2>Daniel Dinwiddie</h2>
+          <h4>Project Manager</h4>
+          <p>Ask anyone who the friendlist person in the office is, and most would say Daniel! He serves as project manager for several of BAM's most critical projects, and much of BAM's recent success can be attributed to his efforts. A tireless people-person and go-getter, Daniel surprisingly enjoys spending time at home with his 3 cats.</p>
+        </div>
+      </div>
+    </div>
+    <div id="profile5" class="profileDiv" title="Eric Eikelmann">
+      <div class="row">
+        <div class="col-md-4"><img src="assets/head05.png" height="200" width="200"></div>
+        <div class="col-md-8 profileRight">
+          <h2>Eric Eikelmann</h2>
+          <h4>Software Engineer</h4>
+          <p>Passionate about technology from a young age, Eric was delighted to be able to work as a software engineer at BAM. Eric's unique talents, skillset, and algorithms have all contributed greatly towards the products that BAM can offer today. BAM lives with his wife, 2 kids, and 4 dogs, and they all enjoy watching the latest superhero movies together.</p>
+        </div>
+      </div>
+    </div>
+    <div id="profile6" class="profileDiv" title="Fred Fastbender">
+      <div class="row">
+        <div class="col-md-4"><img src="assets/head06.png" height="200" width="200"></div>
+        <div class="col-md-8 profileRight">
+          <h2>Finn Fastbender</h2>
+          <h4>Sales</h4>
+          <p>Fred has so much talent in sales that he once sold more girl scout cookies than his local troop, and he wasn't even in girl scouts! Jokes aside, Fred is the funniest guy at BAM, and he brings his energy and humor to great purposes in selling our products to customers. Fred enjoys skiing and snowboarding whenever he gets the chance.</p>
         </div>
       </div>
     </div>
