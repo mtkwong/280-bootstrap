@@ -22,10 +22,11 @@
   "homepage": "https://github.com/mtkwong/280-bootstrap#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "ejs": "^2.5.9",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "http": "0.0.0",
+    "mysql": "^2.15.0",
     "path": "^0.12.7",
     "url": "^0.11.0"
   }
