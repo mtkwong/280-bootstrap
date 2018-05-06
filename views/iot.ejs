@@ -4,7 +4,60 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $("#download").dialog({
+          autoOpen: false,
+          height: 400,
+          width: 700,
+          modal: true,
+          resizable: false,
+          draggable: false,
+        });
+      });
+      function wp() {
+        $("#download").dialog("open");
+      }
+      function dBtn() {
+        let firstName = $("#first").val();
+        let lastName = $("#last").val();
+        let emailAddr = $("#email").val();
+        $.ajax({
+          type: 'POST',
+          url: '/download',
+          data: {
+            first: firstName,
+            last: lastName,
+            email: emailAddr
+          },
+          error: function(err) {
+            console.log("error saving user info");
+            $("#first").val("");
+            $("#last").val("");
+            $("#email").val("");
+            $("#download").dialog("close");
+          },
+          success: function(res) {
+            console.log("user info saved successfully");
+            $("#first").val("");
+            $("#last").val("");
+            $("#email").val("");
+            $("#submitSuccessSpan").show(function() {
+              $(this).fadeOut(4000);
+            });
+            $("#download").dialog("close");
+          }
+        });
+      }
+      function cBtn() {
+        $("#first").val("");
+        $("#last").val("");
+        $("#email").val("");
+        $("#download").dialog("close");
+      }
+    </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
     <style type="text/css">
       /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -52,6 +105,24 @@
         bottom: 0px;
         width: 100%;
       }
+      #download {
+        display: none;
+      }
+      .centerstuff {
+        text-align: center;
+      }
+      #submitSuccessSpan {
+        display: none;
+        position: absolute;
+        border: 2px solid darkgreen;
+        background-color: green;
+        border-radius: 10px;
+        left: 50px;
+        bottom: 70px;
+        color: white;
+        font-size: 20pt;
+        padding: 5px 10px;
+      }
     </style>
   </head>
   <body>
@@ -63,6 +134,8 @@
         <p><a href="https://en.wikipedia.org/wiki/Internet_of_things">What's IoT?</a></p>
         <p><a href="https://www.intel.com/content/www/us/en/internet-of-things/industry-solutions.html">Industry applications</a></p>
         <p><a href="https://www.eliko.ee/iot-research-frontiers/">Current Research areas</a></p>
+        <br/>
+        <button class="btn btn-primary" onclick="wp();">White Paper</button>
       </div>
       <div class="col-sm-8 text-left"> 
         <div align="center">
@@ -96,19 +169,33 @@
           </div>
         </div>
       </div>
-      <!--<div class="col-sm-2 sidenav">
+      <div class="col-sm-2 sidenav">
         <div class="well">
-          <p>ADS</p>
+          <img src="assets/ad_nut.png" height="300" width="180">
         </div>
         <div class="well">
-          <p>ADS</p>
+          <img src="assets/ad_corn.png" height="300" width="180">
         </div>
-      </div>-->
+      </div>
     </div>
+    <div id="download" class="centerstuff">
+      <h2>Download White Paper Modal</h2>
+      <form>
+        <br/><label for="first">First Name:&nbsp;</label>
+        <input id="first" name="first" type="text" placeholder="First Name">
+        <br/><label for="last">Last Name:&nbsp;</label>
+        <input id="last" name="last" type="text" placeholder="Last Name">
+        <br/><label for="email">Email Address:&nbsp;</label>
+        <input id="email" name="email" type="text" placeholder="Email Address">
+      </form>
+      <button id="dBtn" type="button" onclick="dBtn();">Download</button>
+      <button id="cBtn" type="button" onclick="cBtn();">Cancel</button>
+    </div>
+    <span id="submitSuccessSpan">User Info Received Successfully!</span>
   </div>
 
   <footer class="container-fluid text-center">
-    <p>Footer Text</p>
+    <p>&#169; Copyright 2018 BAM, Inc.</p>
   </footer>
   </body>
 </html>
